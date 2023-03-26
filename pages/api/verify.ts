@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../lib/mongodb";
 import { recoverAddress, hashMessage } from "ethers/lib/utils.js";
-
-const message = "gm wagmi frens";
+import dayjs from "dayjs";
+import manifest from "../../lib/manifest";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
   const db = client.db("manifesto");
   const address = req.body.address;
   const signature = req.body.signature;
-  const verifySigner = recoverAddress(hashMessage(message), signature);
+  const verifySigner = recoverAddress(hashMessage(manifest), signature);
   if (verifySigner !== address) {
     res.status(403).end("Sign Message Failed")
     return
@@ -27,6 +27,7 @@ export default async function handler(
     res.status(403).end("Signature already exist")
     return
   }
-  await db.collection("signature").insertOne({ address, signature });
-  res.json({ address, signature, message });
+  let date = dayjs(Date.now()).format("YYYY-MM-DD")
+  await db.collection("signature").insertOne({ address, signature, date });
+  res.json({ address, signature, manifest });
 }

@@ -11,6 +11,6 @@ export default async function handler(
   }
   const client = await clientPromise;
   const db = client.db("manifesto");
-  const signatures = await db.collection("signature").find({}).toArray();
+  const signatures = await (await db.collection("signature").find({}).toArray()).reverse();
   res.json(signatures);
 }
