@@ -28,14 +28,14 @@ const Home: NextPage = () => {
     mutate,
   } = useSWR("/api/signatures", fetcher);
   const { address, isConnected } = useAccount();
-  const { data: signedMessage, signMessageAsync } = useSignMessage();
+  const { signMessageAsync } = useSignMessage();
   const [isSigning, setSigning] = useState<boolean>(false);
   const [page, setPage] = useState(0);
   
   const verify = async () => {
     try {
       setSigning(true);
-      await signMessageAsync({
+      const signedMessage = await signMessageAsync({
         message: manifest
       });
       const res = await fetch("/api/verify", {
