@@ -88,12 +88,13 @@ const Home: NextPage = () => {
           <a
             target="_blank"
             href="https://333builders.notion.site/333builders/333-Builders-07e37ec80b8a450480250cbe04260d06"
+            rel="noreferrer"
           >
             Notion
           </a>
         </div>
         <div className="font-semibold hover:cursor-pointer">
-          <a target="_blank" href="https://discord.com/invite/kWthmQ57dd">
+          <a target="_blank" href="https://discord.com/invite/kWthmQ57dd" rel="noreferrer">
             Discord
           </a>
         </div>
