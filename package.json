@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@everipedia/wagmi-magic-connector": "^0.10.1",
+    "@headlessui/react": "^1.7.13",
     "@rainbow-me/rainbowkit": "^0.12.4",
     "dayjs": "^1.11.7",
     "ethers": "^5.0.0",

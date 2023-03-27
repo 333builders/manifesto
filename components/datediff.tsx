@@ -28,7 +28,7 @@ export default function DateDiff({date} : {date: string}) {
         return <>{Math.abs(dayjs(date).diff(Date.now(), "week"))} week</>
     }
 
-    if(diff >= 3) {
+    if(diff >= 2) {
         return <>{Math.abs(dayjs(date).diff(Date.now(), "d"))} days</>
     }
 

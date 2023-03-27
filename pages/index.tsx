@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import DateDiff from "../components/datediff";
 import manifest from "../lib/manifest";
+import MyDialog from "../components/modal";
 
 type Signature = {
   address: string;
@@ -16,7 +17,7 @@ type Signature = {
 const fetcher = (args: RequestInfo | URL) =>
   fetch(args).then((res) => res.json());
 
-const pageMultiple = 2;
+const pageMultiple = 5;
 
 const Home: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -31,6 +32,8 @@ const Home: NextPage = () => {
   const { signMessageAsync } = useSignMessage();
   const [isSigning, setSigning] = useState<boolean>(false);
   const [page, setPage] = useState(0);
+  const [isOpenModalSuccess, setIsOpenModalSuccess] = useState(false)
+  const [isOpenModalError, setIsOpenModalError] = useState(false)
   
   const verify = async () => {
     try {
@@ -48,8 +51,16 @@ const Home: NextPage = () => {
           "content-type": "application/json",
         },
       });
-      if (res.ok) mutate();
-    } finally {
+      if (res.ok) { 
+        mutate()
+        setIsOpenModalSuccess(true)
+      }
+      else throw new Error()
+    }
+    catch {
+      setIsOpenModalError(true)
+    }
+     finally {
       setSigning(false);
     }
   };
@@ -63,7 +74,7 @@ const Home: NextPage = () => {
   const currentSignatures = signatures?.slice(page, page + pageMultiple);
 
   return (
-    <div className="py-10 bg-[#f3f5f3]">
+    <div className="py-3 bg-[#f3f5f3] overflow-x-hidden relative">
       <Head>
         <title>Manifest 333builders</title>
         <meta
@@ -72,7 +83,7 @@ const Home: NextPage = () => {
         />
         <link href="/favicon.png" rel="icon" />
       </Head>
-      <nav className="flex max-w-7xl w-full items-center mx-auto space-x-5 font-Inter px-2">
+      <nav className="flex w-full sm:w-10/12 items-center mx-auto space-x-5 font-Inter px-2">
         <div className="grow">
           <a href="https://333builders.com">
             <Image
@@ -102,17 +113,10 @@ const Home: NextPage = () => {
       </nav>
       <main>
         <div className="flex flex-col w-full px-3 pt-10">
-          <Image
-            src="/333B_LogoRosso_Tondo 2.svg"
-            width={259}
-            height={138}
-            priority
-            alt="big-logo"
-          />
-          <div className="w-1/4 h-1 bg-[#BF0424] rounded mx-auto mt-8"></div>
-          <div className="text-4xl mx-auto font-SpaceGrotesk font-bold mt-8">
-            Manifest
+          <div className="text-4xl mx-auto font-SpaceGrotesk font-bold mt-8 italic">
+            MANIFEST
           </div>
+          <div className="w-1/4 h-1 bg-[#BF0424] rounded mx-auto mt-8"></div>
           <div className="font-Inter mx-auto w-full max-w-3xl mt-16 space-y-3 italic relative">
             <div className="hidden xl:block absolute -bottom-[50%] -left-[150%]">
               <Image
@@ -348,7 +352,8 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
-
+      <MyDialog status="success" isOpen={isOpenModalSuccess} setIsOpen={setIsOpenModalSuccess} />
+      <MyDialog status="error" isOpen={isOpenModalError} setIsOpen={setIsOpenModalError} />
       <footer></footer>
     </div>
   );
