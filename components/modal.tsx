@@ -62,7 +62,7 @@ export default function MyModal({
                   ) : (
                     <div className="mt-4 space-y-2">
                       <p className="text-gray-500">
-                        Here's how you can contribute even more to the cause:
+                        Here&apos;s how you can contribute even more to the cause:
                       </p>
                       <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://333builders.notion.site/333-Career-8951256caf644c709654d915aa599a2c" target="_blank" rel="noreferrer"><span className="text-xl">🔨</span> Become a builder</a></p>
                       <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://calendly.com/333builders" target="_blank" rel="noreferrer"><span className="text-xl">🙋‍♂️</span> Talk to the Core Team</a></p>
