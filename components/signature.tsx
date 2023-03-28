@@ -12,7 +12,7 @@ export default function MySignature({ signature }: { signature: Signature }) {
       className="my-4 p-4 bg-[#ECECEC] rounded-xl inline-flex flex-col font-SpaceGrotesk mx-2 space-y-6"
       key={signature.address}
     >
-      <div className="flex space-x-3 signatures-center">
+      <div className="flex space-x-3 items-center">
         <p className="text-[#BF0424] text-sm truncate grow w-3/5">
           {signature.address}
         </p>
