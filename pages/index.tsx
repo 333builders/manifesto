@@ -5,11 +5,11 @@ import { useAccount, useSignMessage } from "wagmi";
 import useSWR from "swr";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import DateDiff from "../components/datediff";
 import manifest from "../lib/manifest";
 import MyDialog from "../components/modal";
+import MySignature from "../components/signature";
 
-type Signature = {
+export type Signature = {
   address: string;
   signature: string;
   date: string;
@@ -32,14 +32,14 @@ const Home: NextPage = () => {
   const { signMessageAsync } = useSignMessage();
   const [isSigning, setSigning] = useState<boolean>(false);
   const [page, setPage] = useState(0);
-  const [isOpenModalSuccess, setIsOpenModalSuccess] = useState(false)
-  const [isOpenModalError, setIsOpenModalError] = useState(false)
-  
+  const [isOpenModalSuccess, setIsOpenModalSuccess] = useState(false);
+  const [isOpenModalError, setIsOpenModalError] = useState(false);
+
   const verify = async () => {
     try {
       setSigning(true);
       const signedMessage = await signMessageAsync({
-        message: manifest
+        message: manifest,
       });
       const res = await fetch("/api/verify", {
         method: "POST",
@@ -51,16 +51,13 @@ const Home: NextPage = () => {
           "content-type": "application/json",
         },
       });
-      if (res.ok) { 
-        mutate()
-        setIsOpenModalSuccess(true)
-      }
-      else throw new Error()
-    }
-    catch {
-      setIsOpenModalError(true)
-    }
-     finally {
+      if (res.ok) {
+        mutate();
+        setIsOpenModalSuccess(true);
+      } else throw new Error();
+    } catch {
+      setIsOpenModalError(true);
+    } finally {
       setSigning(false);
     }
   };
@@ -87,7 +84,7 @@ const Home: NextPage = () => {
         <div className="grow">
           <a href="https://333builders.com">
             <Image
-              src="/333B_LogoRosso_Tondo 1.png"
+              src="/logo_rosso.png"
               width={112}
               height={60}
               priority
@@ -100,12 +97,18 @@ const Home: NextPage = () => {
             target="_blank"
             href="https://333builders.notion.site/333builders/333-Builders-07e37ec80b8a450480250cbe04260d06"
             rel="noreferrer"
+            className="hover:text-[#BF0424]"
           >
             Notion
           </a>
         </div>
         <div className="font-semibold hover:cursor-pointer">
-          <a target="_blank" href="https://discord.com/invite/kWthmQ57dd" rel="noreferrer">
+          <a
+            target="_blank"
+            href="https://discord.com/invite/kWthmQ57dd"
+            rel="noreferrer"
+            className="hover:text-[#BF0424]"
+          >
             Discord
           </a>
         </div>
@@ -262,8 +265,19 @@ const Home: NextPage = () => {
                 height={40}
                 alt="signature-icon"
               />
-              <div className="text-xl text-[#BF0424] font-semibold grow">
-                Signatoors
+              <div className="grow">
+                <p className="text-xl text-[#BF0424] font-semibold">
+                  Signatoors
+                </p>
+                <p>
+                  Copy and{" "}
+                  <a
+                    href="https://app.mycrypto.com/verify-message"
+                    className="text-[#BF0424] hover:underline"
+                  >
+                    verify message
+                  </a>
+                </p>
               </div>
               <div className="flex flex-col text-center">
                 {isLoadingSignatures || errorSignatures ? (
@@ -285,20 +299,7 @@ const Home: NextPage = () => {
             ) : (
               <>
                 {currentSignatures.map((item: Signature) => (
-                  <div
-                    className="my-4 p-4 bg-[#ECECEC] rounded-xl inline-flex flex-col font-SpaceGrotesk mx-2 space-y-6"
-                    key={item.address}
-                  >
-                    <div className="flex space-x-2">
-                      <p className="text-[#BF0424] truncate grow pt-4">
-                        {item.address}
-                      </p>
-                      <p className="font-semibold text-xs text-right">
-                        <DateDiff date={item.date} />
-                      </p>
-                    </div>
-                    <p className="truncate">{item.signature}</p>
-                  </div>
+                  <MySignature signature={item} key={item.address} />
                 ))}
               </>
             )}
@@ -352,8 +353,16 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
-      <MyDialog status="success" isOpen={isOpenModalSuccess} setIsOpen={setIsOpenModalSuccess} />
-      <MyDialog status="error" isOpen={isOpenModalError} setIsOpen={setIsOpenModalError} />
+      <MyDialog
+        status="success"
+        isOpen={isOpenModalSuccess}
+        setIsOpen={setIsOpenModalSuccess}
+      />
+      <MyDialog
+        status="error"
+        isOpen={isOpenModalError}
+        setIsOpen={setIsOpenModalError}
+      />
       <footer></footer>
     </div>
   );
