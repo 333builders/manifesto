@@ -56,7 +56,7 @@ export default function MyModal({
                   {status == "error" ? (
                     <div className="mt-2">
                       <p className="text-gray-500 text-lg">
-                        Try to refresh the page or reconnect your wallet
+                        If the problem persist, try to refresh the page or reconnect your wallet
                       </p>
                     </div>
                   ) : (
@@ -64,7 +64,7 @@ export default function MyModal({
                       <p className="text-gray-500">
                         Here&apos;s how you can contribute even more to the cause:
                       </p>
-                      <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://333builders.notion.site/333-Career-8951256caf644c709654d915aa599a2c" target="_blank" rel="noreferrer"><span className="text-xl">🔨</span> Become a builder</a></p>
+                      <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://www.notion.so/333builders/Become-a-Contributor-9b9f39ed63f444c0969c8136dd562c7f" target="_blank" rel="noreferrer"><span className="text-xl">🔨</span> Become a builder</a></p>
                       <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://calendly.com/333builders" target="_blank" rel="noreferrer"><span className="text-xl">🙋‍♂️</span> Talk to the Core Team</a></p>
                       <p className="ml-4 hover:text-[#BF0424] hover:scale-105"><a href="https://www.notion.so/333builders/Open-Activites-05d4a21438054652bd8199f86ab9728d" target="_blank" rel="noreferrer"><span className="text-xl">👀</span> Have a look to our open positions</a></p>
                     </div>

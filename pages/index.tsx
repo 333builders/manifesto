@@ -71,7 +71,7 @@ const Home: NextPage = () => {
   const currentSignatures = signatures?.slice(page, page + pageMultiple);
 
   return (
-    <div className="py-3 bg-[#f3f5f3] overflow-x-hidden relative">
+    <div className="pt-3 bg-[#f6f6f6] overflow-x-hidden relative">
       <Head>
         <title>Manifesto 333builders</title>
         <meta
@@ -92,7 +92,7 @@ const Home: NextPage = () => {
             ></Image>
           </a>
         </div>
-        <div className="font-semibold hover:cursor-pointer">
+        <div className="font-semibold hover:cursor-pointer hidden md:block">
           <a
             target="_blank"
             href="https://333builders.notion.site/333builders/333-Builders-07e37ec80b8a450480250cbe04260d06"
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
             Notion
           </a>
         </div>
-        <div className="font-semibold hover:cursor-pointer">
+        <div className="font-semibold hover:cursor-pointer hidden md:block">
           <a
             target="_blank"
             href="https://discord.com/invite/kWthmQ57dd"
@@ -112,7 +112,10 @@ const Home: NextPage = () => {
             Discord
           </a>
         </div>
-        <ConnectButton chainStatus={"none"} showBalance={false} />
+        <ConnectButton
+          chainStatus={"icon"}
+          showBalance={false}
+        />
       </nav>
       <main>
         <div className="flex flex-col w-full px-3 pt-10">
@@ -132,7 +135,7 @@ const Home: NextPage = () => {
             </div>
             <div className="hidden xl:block absolute -bottom-[50%] -right-[150%]">
               <Image
-                src="/Futuristic_city2.svg"
+                src="/Futuristic_city2.png"
                 width={1024}
                 height={1024}
                 priority
@@ -257,7 +260,7 @@ const Home: NextPage = () => {
               )}
             </div>
           </div>
-          <div className="max-w-xl p-8 rounded-xl font-SpaceGrotesk border-[#B7B7B7] border-2 mx-auto mt-20 w-full flex flex-col space-y-4">
+          <div className="max-w-xl p-8 rounded-xl font-SpaceGrotesk border-[#B7B7B7] border-2 mx-auto mt-20 mb-10 w-full flex flex-col space-y-4">
             <div className="flex items-center space-x-3 mb-6">
               <Image
                 src="/signature-hand.svg"
@@ -363,7 +366,23 @@ const Home: NextPage = () => {
         isOpen={isOpenModalError}
         setIsOpen={setIsOpenModalError}
       />
-      <footer></footer>
+      <footer className="bg-[#1f232c] w-full mt-10 flex flex-col">
+        <div className="mx-auto mt-3">
+          <Image
+            src="/333B_LogoBianco_Tondo.png"
+            width={112}
+            height={60}
+            priority
+            alt="logo"
+          ></Image>
+        </div>
+        <div className="mx-auto space-x-8 my-10 font-Inter font-medium text-slate-200">
+          <a href="https://333builders.notion.site/333builders/333-Builders-07e37ec80b8a450480250cbe04260d06" className="hover:cursor-pointer">Notion</a>
+          <a href="https://discord.com/invite/kWthmQ57dd" className="hover:cursor-pointer">Discord</a>
+          <a href="https://www.linkedin.com/company/333-builders/" className="hover:cursor-pointer">LinkedIn</a>
+          <a href="https://youtube.com/channel/UCsxVs7fc9--kQ-K3QJPnupQ" className="hover:cursor-pointer">YouTube</a>
+        </div>
+      </footer>
     </div>
   );
 };
