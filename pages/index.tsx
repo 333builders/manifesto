@@ -263,7 +263,7 @@ const Home: NextPage = () => {
           <div className="max-w-xl p-8 rounded-xl font-SpaceGrotesk border-[#B7B7B7] border-2 mx-auto mt-20 mb-10 w-full flex flex-col space-y-4">
             <div className="flex items-center space-x-3 mb-6">
               <Image
-                src="/signature-hand.svg"
+                src="/signature_hand.png"
                 width={41}
                 height={40}
                 alt="signature-icon"
