@@ -12,11 +12,11 @@ export default function DateDiff({date} : {date: string}) {
         return <>{Math.abs(dayjs(date).diff(Date.now(), "y"))} year</>
     }
 
-    if(diff >= 60) {
+    if(diff >= 62) {
         return <>{Math.abs(dayjs(date).diff(Date.now(), "month"))} months</>
     }
 
-    if(diff >= 30) {
+    if(diff >= 31) {
         return <>{Math.abs(dayjs(date).diff(Date.now(), "month"))} month</>
     }
 
